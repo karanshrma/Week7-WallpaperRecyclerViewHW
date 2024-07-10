@@ -1,4 +1,4 @@
-package com.example.wallpaperapp
+package com.example.wallpaperapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,20 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wallpaperapp.R
 
 class ImagesRecyclerViewAdapter(private var dataSet: Array<String>) :
     RecyclerView.Adapter<ImagesRecyclerViewAdapter.ViewHolder>() {
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder)
-     */
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
+        val imageView: ImageView
 
         init {
             // Define click listener for the ViewHolder's View
             textView = view.findViewById(R.id.textView)
+            imageView = view.findViewById(R.id.ImageView)
         }
     }
 
@@ -43,6 +43,7 @@ class ImagesRecyclerViewAdapter(private var dataSet: Array<String>) :
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.textView.text = dataSet[position]
+        viewHolder.imageView.setImageResource(R.drawable.ic_launcher_background)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -2,6 +2,7 @@ package com.example.wallpaperapp.presentation
 
 import com.example.wallpaperapp.domain.entity.WallpaperLink
 
+
 sealed class WallPaperUiState{
     object Loading : WallPaperUiState()
     object EmptyList : WallPaperUiState()

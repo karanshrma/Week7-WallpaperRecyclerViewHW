@@ -2,20 +2,39 @@ package com.example.wallpaperapp.di
 
 import com.example.wallpaperapp.Utils.Constants.BASE_URL
 import com.example.wallpaperapp.data.api.PicSumApi
+import com.example.wallpaperapp.data.api.WallpaperRepositoryImpl
+import com.example.wallpaperapp.domain.repository.WallpaperRepository
+import dagger.Binds
+import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-class AppModule {
+@Module
+@InstallIn(SingletonComponent::class)
+interface AppModule {
 
-    @Singleton
-    @Provides
-    fun provideRetrofitApi(
-        // Potential dependencies of this type
-    ): PicSumApi {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .build()
-            .create(PicSumApi::class.java)
+    companion object {
+        @Provides
+        @Singleton
+        fun provideRetrofitApi(
+            // Potential dependencies of this type
+        ): PicSumApi {
+            return Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+
+                .build()
+                .create(PicSumApi::class.java)
+        }
     }
+    @Binds
+    @Singleton
+    fun provideWallpaperRepository(repositoryimpl: WallpaperRepositoryImpl): WallpaperRepository
+
+
+
 }
